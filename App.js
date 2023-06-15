@@ -1,16 +1,38 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
 
 import api from './src/services/api';
 
 export default function App(){
 
-  const [cep, setCep] = useState(null);
-
+  const [cep, setCep] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [complemento, setComplemento] = useState('');
+  const [localidade, setLocalidade] = useState('');
+  const [uf, setUf] = useState('');
+  const[view, setView] = useState(false);
 
   async function buscar(){
-    const response =  await api.get(cep + '/json/?callback=meu_callback').catch(err=>err);
-    console.log(response.data);
+    const response =  await api.get(`${cep}/json`);
+    setEndereco(response.data.logradouro);
+    setComplemento(response.data.complemento);
+    setLocalidade(response.data.localidade);
+    setUf(response.data.uf);
+    setView(true);
+    Keyboard.dismiss();
+    this.textInput.clear();
+
+  }
+
+  function limpar(){
+    
+    setEndereco('');
+    setComplemento('');
+    setLocalidade('');
+    setUf('');
+    setView(false);
+    
+    
   }
 
 
@@ -20,26 +42,26 @@ export default function App(){
 
        {/* View onde vai ficar parte de buscar Cep*/}
       <View style={styles.areaBusca}>
-          <TextInput onChange={(valor)=> setCep(valor)} placeholder='Ex: 79003144' keyboardType='numeric' style={styles.input}></TextInput>
+          <TextInput  ref={input => { this.textInput = input }} onChangeText={(cep)=> setCep(cep)} placeholder='Ex: 79003144' keyboardType='numeric' style={styles.input}></TextInput>
           <View style={styles.areaBtn}>
           <TouchableOpacity style={[styles.btn, {backgroundColor: 'blue'} ] } onPress={buscar}>
             <Text style={{color: '#fff'}}>Buscar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.btn, {backgroundColor: '#f15500'} ]}>
+          <TouchableOpacity style={[styles.btn, {backgroundColor: '#f15500'} ]} onPress={limpar}>
             <Text style={{color: '#fff'}}>Limpar</Text>
           </TouchableOpacity>
           </View>
       </View>
 
-      {/* {cep !== null &&( */}
+       {view !== false &&(
         <View style={styles.areaResultado}>
-            <Text style={styles.txtResultado}>Endereço: </Text>
-            <Text style={styles.txtResultado}>Complemento: </Text>
-            <Text style={styles.txtResultado}>Localidade: </Text>
-            <Text style={styles.txtResultado}>UF: </Text>
+            <Text style={styles.txtResultado}>Endereço: {endereco} </Text>
+            <Text style={styles.txtResultado}>Complemento: {complemento} </Text>
+            <Text style={styles.txtResultado}>Localidade: {localidade}</Text>
+            <Text style={styles.txtResultado}>UF: {uf}</Text>
         </View>
 
-      {/* )} */}
+       )}
       
 
 
