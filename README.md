@@ -18,8 +18,6 @@ estilização de components.
 
 ## Demonstração
 
-![20230615_012826](https://github.com/Alef-Daniel/appBuscadorCep/assets/83924026/5639dbef-09ea-46bd-b643-d8253d047e82)
-
 
 https://github.com/Alef-Daniel/appBuscadorCep/assets/83924026/c8d2a53b-6b07-4004-8018-afc9d0036c10
 
