@@ -1,38 +1,43 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard, Alert } from 'react-native'
 
 import api from './src/services/api';
 
 export default function App(){
 
   const [cep, setCep] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [complemento, setComplemento] = useState('');
-  const [localidade, setLocalidade] = useState('');
-  const [uf, setUf] = useState('');
+  const[userCep, setUserCep]=useState(null);
   const[view, setView] = useState(false);
 
   async function buscar(){
+   
+    if(cep===''){
+      Alert("Digite um cep válido");
+      setCep('');
+      return;
+    }
+   
+   
+   try{
     const response =  await api.get(`${cep}/json`);
-    setEndereco(response.data.logradouro);
-    setComplemento(response.data.complemento);
-    setLocalidade(response.data.localidade);
-    setUf(response.data.uf);
+    setUserCep(response.data);
     setView(true);
     Keyboard.dismiss();
     this.textInput.clear();
+    }catch(error){
 
-  }
+        if(error !== null){
+          alert("Cep não encontrado");
+          return;
+        }
+    }
+   }
 
   function limpar(){
     
-    setEndereco('');
-    setComplemento('');
-    setLocalidade('');
-    setUf('');
+   setUserCep(null);
     setView(false);
-    
-    
+    this.textInput.clear();
   }
 
 
@@ -55,10 +60,10 @@ export default function App(){
 
        {view !== false &&(
         <View style={styles.areaResultado}>
-            <Text style={styles.txtResultado}>Endereço: {endereco} </Text>
-            <Text style={styles.txtResultado}>Complemento: {complemento} </Text>
-            <Text style={styles.txtResultado}>Localidade: {localidade}</Text>
-            <Text style={styles.txtResultado}>UF: {uf}</Text>
+            <Text style={styles.txtResultado}>Endereço: {userCep.logradouro} </Text>
+            <Text style={styles.txtResultado}>Complemento: {userCep.complemento} </Text>
+            <Text style={styles.txtResultado}>Localidade: {userCep.localidade}</Text>
+            <Text style={styles.txtResultado}>UF: {userCep.uf}</Text>
         </View>
 
        )}
