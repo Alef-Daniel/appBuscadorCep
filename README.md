@@ -31,5 +31,5 @@ Consumir a api https://viacep.com.br/ws/.
 
 o usuário digita um cep e devolvemos a ele informações referente a esse cep como : Endereço, Complemento, localidade e UF.
 
-o usuário tam,bém tem a opção de limpar os dados que digitou .
+o usuário também tem a opção de limpar os dados que digitou .
 
