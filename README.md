@@ -29,7 +29,7 @@ https://github.com/Alef-Daniel/appBuscadorCep/assets/83924026/c8d2a53b-6b07-4004
 
 Consumir a api https://viacep.com.br/ws/.
 
-o usuário digita um cep e devolvemos a ele informações mreferente a esse cep como : Endereço, Complemento, localidade e UF.
+o usuário digita um cep e devolvemos a ele informações referente a esse cep como : Endereço, Complemento, localidade e UF.
 
 o usuário tam,bém tem a opção de limpar os dados que digitou .
 
