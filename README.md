@@ -14,6 +14,8 @@ Utilização da biblioteca Axios para consumo de api's.
 
 estilização de components. 
 
+tratativas de erros com try catch.
+
 
 
 ## Demonstração
