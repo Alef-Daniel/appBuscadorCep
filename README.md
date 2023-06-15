@@ -18,7 +18,12 @@ estilização de components.
 
 ## Demonstração
 
-https://github.com/Alef-Daniel/demos/blob/master/20230606_034349.mp4
+
+
+https://github.com/Alef-Daniel/appBuscadorCep/assets/83924026/c8d2a53b-6b07-4004-8018-afc9d0036c10
+
+
+
 ## Funcionalidades
 
 Consumir a api https://viacep.com.br/ws/.
